@@ -14,6 +14,8 @@ def movie_picker():
         movie_list.append(i.a.text)
 
     picker = random.choice(movie_list)
-    print(picker)
+    return(picker)
+    
 
-movie_picker()
+movie = movie_picker()
+print(movie)
