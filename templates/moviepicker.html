@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="container"></main>
+<div class="container p-5">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card text-center" style="width: 18rem;">
+            <div class="card-title">IMDB Rank: {{ rank }}</div>
+            <div class="card-body">
+                <img src=" {{ poster }}" /img>
+                <h5>{{ film }}</h5>
+                <h5>{{ year }}</h5>
+                <a href="/moviepicker" class="btn btn-primary">Repick!</a>
+            </div>
+        </div>
+    </div>
+</div>
+</main><!-- /.container -->
+{% endblock %}

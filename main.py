@@ -24,3 +24,7 @@ def film_scrapper():
 def pick_movie():
     movie = film_scrapper()
     return random.choice(movie)
+
+
+if __name__ == "__main__":
+    pick_movie()
