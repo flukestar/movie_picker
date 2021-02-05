@@ -18,13 +18,3 @@ def moviepicker():
     return render_template(
         "moviepicker.html", film=film, rank=rank, year=year, poster=poster, title=title
     )
-
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    title = "Login"
-    if request.method == "POST":
-        user = request.form["nm"]
-        return redirect("/user/" + user)
-    else:
-        return render_template("login.html", title=title)
