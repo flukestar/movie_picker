@@ -18,3 +18,7 @@ def moviepicker():
     return render_template(
         "moviepicker.html", film=film, rank=rank, year=year, poster=poster, title=title
     )
+
+
+if __name__ == "__main__":
+    app.run()
