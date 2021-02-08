@@ -37,7 +37,7 @@ def moviepicker():
     )
 
 
-@app.route("/watchlist", methods=["GET", "POST"])
+@app.route("/watched", methods=["GET", "POST"])
 def watchlist():
     title = "Watched List"
     if request.method == "POST":
@@ -48,10 +48,10 @@ def watchlist():
         )
         db.session.add(film)
         db.session.commit()
-        return redirect("/watchlist")
+        return redirect("/watched")
     else:
         film_lists = Watched.query.all()
-        return render_template("watchlist.html", title=title, film_lists=film_lists)
+        return render_template("watched.html", title=title, film_lists=film_lists)
 
 
 @app.route("/delete/<int:id>")
@@ -59,7 +59,7 @@ def delete(id):
     watched_id = Watched.query.get_or_404(id)
     db.session.delete(watched_id)
     db.session.commit()
-    return redirect("/watchlist")
+    return redirect("/watched")
 
 
 if __name__ == "__main__":
