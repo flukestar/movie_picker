@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 import imdbscrapper
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
 db = SQLAlchemy(app)
 
@@ -60,7 +61,3 @@ def delete(id):
     db.session.delete(watched_id)
     db.session.commit()
     return redirect("/seen")
-
-
-if __name__ == "__main__":
-    app.run()
