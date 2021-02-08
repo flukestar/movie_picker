@@ -22,7 +22,7 @@ def moviepicker():
 
 
 @app.route("/watched", methods=["GET", "POST"])
-def watchlist():
+def watched():
     title = "Watched List"
     if request.method == "POST":
         film = Watched(
