@@ -21,6 +21,7 @@ def moviepicker():
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 @app.route("/watchlist", methods=["GET", "POST"])
 def watchlist():
@@ -48,5 +49,7 @@ def delete(id):
 
 
 >>>>>>> d17d991 (removed old comments from app.py)
+=======
+>>>>>>> 7891faad2427434f2032f4f7ad61a26d4e05b395
 if __name__ == "__main__":
     app.run()
