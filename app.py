@@ -1,8 +1,25 @@
 from flask import Flask, redirect, render_template, request
+from flask_sqlalchemy import SQLAlchemy
 
 import imdbscrapper
 
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
+db = SQLAlchemy(app)
+
+
+class Watched(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    movie = db.Column(db.String(200), nullable=False)
+    watched_date = db.Column(db.String(20), nullable=False)
+    picked_by = db.Column(db.String(200), nullable=False)
+
+    def __repr__(self):
+        return "<Watched(movie='%s', watched_date='%s', picked_by='%s')>" % (
+            self.movie,
+            self.watched_date,
+            self.picked_by,
+        )
 
 
 @app.route("/")
