@@ -20,10 +20,9 @@ def moviepicker():
     )
 
 
-
-@app.route("/watched", methods=["GET", "POST"])
-def watched():
-    title = "Watched List"
+@app.route("/seen", methods=["GET", "POST"])
+def seen():
+    title = "Seen"
     if request.method == "POST":
         film = Watched(
             movie=request.form["movie"],
@@ -32,7 +31,7 @@ def watched():
         )
         db.session.add(film)
         db.session.commit()
-        return redirect("/watched")
+        return redirect("/seen")
     else:
         film_lists = Watched.query.all()
         return render_template("watched.html", title=title, film_lists=film_lists)
@@ -43,7 +42,7 @@ def delete(id):
     watched_id = Watched.query.get_or_404(id)
     db.session.delete(watched_id)
     db.session.commit()
-    return redirect("/watched")
+    return redirect("/seen")
 
 
 if __name__ == "__main__":
