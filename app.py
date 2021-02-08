@@ -20,14 +20,8 @@ def moviepicker():
     )
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-@app.route("/watchlist", methods=["GET", "POST"])
-=======
+
 @app.route("/watched", methods=["GET", "POST"])
->>>>>>> sqllite_db_feature
 def watchlist():
     title = "Watched List"
     if request.method == "POST":
@@ -49,17 +43,8 @@ def delete(id):
     watched_id = Watched.query.get_or_404(id)
     db.session.delete(watched_id)
     db.session.commit()
-<<<<<<< HEAD
-    return redirect("/watchlist")
-
-
->>>>>>> d17d991 (removed old comments from app.py)
-=======
->>>>>>> 7891faad2427434f2032f4f7ad61a26d4e05b395
-=======
     return redirect("/watched")
 
 
->>>>>>> sqllite_db_feature
 if __name__ == "__main__":
     app.run()
