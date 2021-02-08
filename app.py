@@ -62,13 +62,5 @@ def delete(id):
     return redirect("/watchlist")
 
 
-# @app.route("/add")
-# def delete(id):
-#     watched_id = Watched.query.get_or_404(id)
-#     db.session.delete(watched_id)
-#     db.session.commit()
-#     return redirect("/watchlist")
-
-
 if __name__ == "__main__":
     app.run()
