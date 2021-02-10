@@ -22,6 +22,10 @@ class Watched(db.Model):
             self.picked_by,
         )
 
+@app.route("/scores")
+def scores():
+    title = "Scores"
+    return render_template("index.html", title=title)
 
 @app.route("/")
 def index():
@@ -70,4 +74,4 @@ def login():
 
 
 if __name__ == "__main__":
-    app.run(debug=TRUE)
+    app.run()
