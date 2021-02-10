@@ -1,11 +1,15 @@
+from os import environ
+
 from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 import imdbscrapper
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///mysite.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    environ.get("DATABASE_URL") or "sqlite:///mysite.db"
+)
 db = SQLAlchemy(app)
 
 
@@ -22,10 +26,12 @@ class Watched(db.Model):
             self.picked_by,
         )
 
+
 @app.route("/scores")
 def scores():
     title = "Scores"
-    return render_template("index.html", title=title)
+    return render_template("scores.html", title=title)
+
 
 @app.route("/")
 def index():
