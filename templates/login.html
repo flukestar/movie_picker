@@ -1,11 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container">Work in progress here</div>
-<div class="container">
-    <form action="http://localhost:5000/login" method="post">
-        <p>Enter Name:</p>
-        <p><input type="text" class="form-control" name="nm" /></p>
-        <p><input type="submit" value="submit" /></p>
-    </form>
+
+<div class="position-absolute top-50 start-50 translate-middle" style="width: 18rem;">
+
+    <main class="form-signin">
+        <form>
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <label for="inputEmail" class="visually-hidden">Email address</label>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <label for="inputPassword" class="visually-hidden">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <p class="mt-5 mb-3 text-muted">&copy; Project Mario</p>
+        </form>
+    </main>
+
 </div>
 {% endblock %}

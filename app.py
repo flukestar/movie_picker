@@ -62,5 +62,12 @@ def delete(id):
     db.session.commit()
     return redirect("/seen")
 
+
+@app.route("/login")
+def login():
+    title = "Login"
+    return render_template("login.html", title=title)
+
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=TRUE)
