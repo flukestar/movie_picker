@@ -1,4 +1,6 @@
+from datetime import datetime
 from os import environ
+
 
 from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
@@ -6,7 +8,6 @@ from flask_sqlalchemy import SQLAlchemy
 import imdbscrapper
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_DATABASE_URI"] = (
     environ.get("DATABASE_URL") or "sqlite:///mysite.db"
 )
@@ -16,11 +17,11 @@ db = SQLAlchemy(app)
 class Watched(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     movie = db.Column(db.String(200), nullable=False)
-    watched_date = db.Column(db.String(20), nullable=False)
+    watched_date = db.Column(db.DateTime, default=datetime.utcnow)
     picked_by = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
-        return "<Watched(movie='%s', watched_date='%s', picked_by='%s')>" % (
+        return "<Watched(movie='%s', watched_date='%r', picked_by='%s')>" % (
             self.movie,
             self.watched_date,
             self.picked_by,
@@ -52,16 +53,18 @@ def moviepicker():
 def seen():
     title = "Seen"
     if request.method == "POST":
+        watched_date = datetime.strptime(request.form["watched_date"], "%Y-%m-%d")
+
         film = Watched(
             movie=request.form["movie"],
-            watched_date=request.form["watched_date"],
+            watched_date=watched_date.date(),
             picked_by=request.form["picked_by"],
         )
         db.session.add(film)
         db.session.commit()
         return redirect("/seen")
     else:
-        film_lists = Watched.query.all()
+        film_lists = Watched.query.order_by(Watched.watched_date).all()
         return render_template("watched.html", title=title, film_lists=film_lists)
 
 
