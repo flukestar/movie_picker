@@ -21,7 +21,7 @@
             <tr>
                 <th>{{ loop.index }}</th>
                 <td>{{ film.movie }}</td>
-                <td>{{ film.watched_date }}</td>
+                <td>{{ film.watched_date.date() }}</td>
                 <td>{{ film.picked_by }}</td>
                 <td>
                     <a href="/delete/{{ film.id }}">Delete</a>
@@ -34,9 +34,9 @@
 
 <div class="container">
     <form action="/seen" method="post">
-        <input type="text" name="movie" id="movie">
-        <input type="date" name="watched_date" id="watched_date">
-        <input type="text" name="picked_by" id="picked_by">
+        <input type="text" name="movie" id="movie" required>
+        <input type="date" name="watched_date" id="watched_date" required>
+        <input type="text" name="picked_by" id="picked_by" required>
         <input type="submit" value="add me">
     </form>
 </div>
