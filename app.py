@@ -28,16 +28,16 @@ class Watched(db.Model):
         )
 
 
-@app.route("/scores")
-def scores():
-    title = "Scores"
-    return render_template("scores.html", title=title)
-
-
 @app.route("/")
 def index():
     title = "Home"
     return render_template("index.html", title=title)
+
+
+@app.route("/scores")
+def scores():
+    title = "Scores"
+    return render_template("scores.html", title=title)
 
 
 @app.route("/moviepicker")
@@ -49,23 +49,28 @@ def moviepicker():
     )
 
 
-@app.route("/seen", methods=["GET", "POST"])
+@app.route("/seen")
 def seen():
     title = "Seen"
-    if request.method == "POST":
-        watched_date = datetime.strptime(request.form["watched_date"], "%Y-%m-%d")
+    film_lists = Watched.query.order_by(Watched.watched_date).all()
+    return render_template("watched.html", title=title, film_lists=film_lists)
 
+
+@app.route("/addme", methods=["GET", "POST"])
+def addme():
+    title = "Add Me"
+    if request.method == "POST":
         film = Watched(
             movie=request.form["movie"],
-            watched_date=watched_date.date(),
+            watched_date=datetime.strptime(request.form["watched_date"], "%Y-%m-%d"),
             picked_by=request.form["picked_by"],
         )
         db.session.add(film)
         db.session.commit()
-        return redirect("/seen")
+        return redirect("/addme")
     else:
         film_lists = Watched.query.order_by(Watched.watched_date).all()
-        return render_template("watched.html", title=title, film_lists=film_lists)
+        return render_template("addme.html", title=title, film_lists=film_lists)
 
 
 @app.route("/delete/<int:id>")
@@ -73,7 +78,7 @@ def delete(id):
     watched_id = Watched.query.get_or_404(id)
     db.session.delete(watched_id)
     db.session.commit()
-    return redirect("/seen")
+    return redirect("/addme")
 
 
 @app.route("/login")

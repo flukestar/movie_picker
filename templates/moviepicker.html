@@ -1,29 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-<main class="container">
-    <div class="container p-3">
-        <div class="container">
-            <div class="d-flex justify-content-center align-items-center">
-                <h1>Movie Picker</h1>
-            </div>
-        </div>
-        <div class="d-flex justify-content-center align-items-center">
-            <h5>For when you can't decide on a film for Movie night</h5>
-        </div>
+<main class="container p-3">
+    <div class="d-flex justify-content-center align-items-center">
+        <h1>Movie Picker</h1>
     </div>
+    <div class="mb-5">
+        <h5>For when you can't decide on a film for Movie night</h5>
     </div>
-    <div class="container p-5">
-        <div class="d-flex justify-content-center align-items-center">
-            <div class="card text-center" style="width: 18rem;">
-                <div class="card-title">IMDB Rank: {{ rank }}</div>
-                <div class="card-body">
-                    <img src=" {{ poster }}" /img>
-                    <h5>{{ film }}</h5>
-                    <h5>{{ year }}</h5>
-                    <a href="/moviepicker" class="btn btn-primary">Repick!</a>
-                </div>
+
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card text-center" style="width: 18rem;">
+            <div class="card-title">IMDB Rank: {{ rank }}</div>
+            <div class="card-body">
+                <img src=" {{ poster }}" /img>
+                <h5>{{ film }}</h5>
+                <h5>{{ year }}</h5>
+                <a href="/moviepicker" class="btn btn-primary">Repick!</a>
             </div>
         </div>
     </div>
+
 </main><!-- /.container -->
 {% endblock %}
