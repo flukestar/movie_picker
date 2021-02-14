@@ -13,7 +13,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = (
 )
 db = SQLAlchemy(app)
 
-
+# Database Models for Watched Films
 class Watched(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     movie = db.Column(db.String(200), nullable=False)
@@ -34,12 +34,6 @@ def index():
     return render_template("index.html", title=title)
 
 
-@app.route("/scores")
-def scores():
-    title = "Scores"
-    return render_template("scores.html", title=title)
-
-
 @app.route("/moviepicker")
 def moviepicker():
     title = "Movie Picker"
@@ -54,6 +48,18 @@ def seen():
     title = "Seen"
     film_lists = Watched.query.order_by(Watched.watched_date).all()
     return render_template("watched.html", title=title, film_lists=film_lists)
+
+
+@app.route("/scores")
+def scores():
+    title = "Scores"
+    return render_template("scores.html", title=title)
+
+
+@app.route("/login")
+def login():
+    title = "Login"
+    return render_template("login.html", title=title)
 
 
 @app.route("/addme", methods=["GET", "POST"])
@@ -79,12 +85,6 @@ def delete(id):
     db.session.delete(watched_id)
     db.session.commit()
     return redirect("/addme")
-
-
-@app.route("/login")
-def login():
-    title = "Login"
-    return render_template("login.html", title=title)
 
 
 if __name__ == "__main__":
