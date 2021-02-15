@@ -9,7 +9,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Movie</th>
                 <th scope="col">Date</th>
                 <th scope="col">Picked by</th>
@@ -18,7 +17,6 @@
         <tbody>
             {% for film in film_lists %}
             <tr>
-                <th>{{ loop.index }}</th>
                 <td>{{ film.movie }}</td>
                 <td>{{ film.watched_date.date() }}</td>
                 <td>{{ film.picked_by }}</td>
@@ -27,6 +25,4 @@
         </tbody>
     </table>
 </div>
-
-
 {% endblock %}
