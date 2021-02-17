@@ -5,6 +5,7 @@ from os import environ
 from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
+
 import imdbscrapper
 
 app = Flask(__name__)
@@ -46,7 +47,7 @@ def moviepicker():
 @app.route("/seen")
 def seen():
     title = "Seen"
-    film_lists = Watched.query.order_by(Watched.watched_date).all()
+    film_lists = Watched.query.order_by(Watched.watched_date.desc())
     return render_template("watched.html", title=title, film_lists=film_lists)
 
 
@@ -75,7 +76,7 @@ def addme():
         db.session.commit()
         return redirect("/addme")
     else:
-        film_lists = Watched.query.order_by(Watched.watched_date.desc()).all()
+        film_lists = Watched.query.order_by(Watched.watched_date.asc()).all()
         return render_template("addme.html", title=title, film_lists=film_lists)
 
 
