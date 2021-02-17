@@ -75,7 +75,7 @@ def addme():
         db.session.commit()
         return redirect("/addme")
     else:
-        film_lists = Watched.query.order_by(Watched.watched_date).all()
+        film_lists = Watched.query.order_by(Watched.watched_date.desc()).all()
         return render_template("addme.html", title=title, film_lists=film_lists)
 
 
