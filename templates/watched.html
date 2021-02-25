@@ -7,7 +7,28 @@
     </p>
 </div>
 
-<div class="container p-3">
+{% for film in film_lists %}
+
+<div class="card mb-3 mx-auto shadow" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4 d-flex align-items-center">
+            <div class="container">
+                <img src="{{ film.poster }}" alt="film poster">
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{ film.movie }}</h5>
+                <p class="card-text">{{ film.watched_date.date() }}</p>
+                <p class="card-text"><small class="text-muted">picked by {{ film.picked_by }}</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+<!-- <div class="container p-3">
     <table class="table">
         <thead>
             <tr>
@@ -26,5 +47,5 @@
             {% endfor %}
         </tbody>
     </table>
-</div>
+</div> -->
 {% endblock %}

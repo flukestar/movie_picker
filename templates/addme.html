@@ -13,6 +13,7 @@
                 <th scope="col">Movie</th>
                 <th scope="col">Date</th>
                 <th scope="col">Picked by</th>
+                <th scope="col">Poster</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -23,6 +24,7 @@
                 <td>{{ film.movie }}</td>
                 <td>{{ film.watched_date.date() }}</td>
                 <td>{{ film.picked_by }}</td>
+                <td>{{ film.poster }}</td>
                 <td>
                     <a href="/delete/{{ film.id }}">Delete</a>
                 </td>
@@ -32,11 +34,24 @@
     </table>
 </div>
 
-<div class="container">
+<div class="container me-auto" style="width: 300px;">
     <form action="/addme" method="post">
-        <input type="text" name="movie" id="movie" required>
-        <input type="date" name="watched_date" id="watched_date" required>
-        <input type="text" name="picked_by" id="picked_by" required>
+        <div class="form-group mb-3">
+            <label for="movie">Movie</label>
+            <input type="text" name="movie" id="movie" placeholder="Movie title" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="poster">Poster</label>
+            <input type="text" name="poster" id="poster" placeholder="Enter URL" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="watched_date">Date</label>
+            <input type="date" name="watched_date" id="watched_date" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="picked_by">Picked by</label>
+            <input type="text" name="picked_by" id="picked_by" required>
+        </div>
         <input type="submit" value="add me">
     </form>
 </div>

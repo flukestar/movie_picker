@@ -20,12 +20,20 @@ class Watched(db.Model):
     movie = db.Column(db.String(200), nullable=False)
     watched_date = db.Column(db.DateTime, default=datetime.utcnow)
     picked_by = db.Column(db.String(200), nullable=False)
+    poster = db.Column(
+        db.String(800),
+        default="https://m.media-amazon.com/images/S/sash/85lhIiFCmSScRzu.png",
+    )
 
     def __repr__(self):
-        return "<Watched(movie='%s', watched_date='%r', picked_by='%s')>" % (
-            self.movie,
-            self.watched_date,
-            self.picked_by,
+        return (
+            "<Watched(movie='%s', watched_date='%r', picked_by='%s', poster='%s')>"
+            % (
+                self.movie,
+                self.watched_date,
+                self.picked_by,
+                self.poster,
+            )
         )
 
 
@@ -69,6 +77,7 @@ def addme():
     if request.method == "POST":
         film = Watched(
             movie=request.form["movie"],
+            poster=request.form["poster"],
             watched_date=datetime.strptime(request.form["watched_date"], "%Y-%m-%d"),
             picked_by=request.form["picked_by"],
         )
