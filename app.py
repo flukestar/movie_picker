@@ -12,6 +12,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = (
     environ.get("DATABASE_URL") or "sqlite:///mysite.db"
 )
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 # Database Models for Watched Films
@@ -55,7 +56,7 @@ def moviepicker():
 @app.route("/seen")
 def seen():
     title = "Seen"
-    film_lists = Watched.query.order_by(Watched.watched_date.desc())
+    film_lists = Watched.query.order_by(Watched.watched_date.desc()).all()
     return render_template("watched.html", title=title, film_lists=film_lists)
 
 

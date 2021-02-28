@@ -10,6 +10,10 @@
 {% for film in film_lists %}
 
 <div class="card mb-3 mx-auto shadow" style="max-width: 540px;">
+    <div class="card-header text-start bg-white">
+        {{ film.watched_date.date().strftime('%d %b %Y') }}
+    </div>
+
     <div class="row g-0">
         <div class="col-md-4 d-flex align-items-center">
             <div class="container">
@@ -19,8 +23,8 @@
         <div class="col-md-8">
             <div class="card-body">
                 <h5 class="card-title">{{ film.movie }}</h5>
-                <p class="card-text">{{ film.watched_date.date() }}</p>
-                <p class="card-text"><small class="text-muted">picked by {{ film.picked_by }}</small></p>
+                <!-- <p class="card-text">{{ film.watched_date.date() }}</p> -->
+                <p class="card-text"><small class="text-muted">{{ film.picked_by }}</small></p>
             </div>
         </div>
     </div>
