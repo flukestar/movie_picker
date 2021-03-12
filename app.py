@@ -21,9 +21,9 @@ class Watched(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     watched_date = db.Column(db.DateTime, default=datetime.utcnow)
-    picked_by = db.Column(db.String(200), nullable=False)
+    picked_by = db.Column(db.String(50), nullable=False)
     director = db.Column(db.String(100), nullable=False)
-    plot = db.Column(db.String(100), nullable=False)
+    plot = db.Column(db.String(500), nullable=False)
     year = db.Column(db.Integer(), nullable=False)
     poster = db.Column(
         db.String(800),
