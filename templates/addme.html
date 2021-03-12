@@ -21,7 +21,7 @@
             {% for film in film_lists %}
             <tr>
                 <th>{{ loop.index }}</th>
-                <td>{{ film.movie }}</td>
+                <td>{{ film.title }}</td>
                 <td>{{ film.watched_date.date() }}</td>
                 <td>{{ film.picked_by }}</td>
                 <td>{{ film.poster }}</td>

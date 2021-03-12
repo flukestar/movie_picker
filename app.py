@@ -7,6 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 import imdbscrapper
+from omdb_api import get_film_info
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = (
@@ -18,23 +19,26 @@ db = SQLAlchemy(app)
 # Database Models for Watched Films
 class Watched(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    movie = db.Column(db.String(200), nullable=False)
+    title = db.Column(db.String(200), nullable=False)
     watched_date = db.Column(db.DateTime, default=datetime.utcnow)
     picked_by = db.Column(db.String(200), nullable=False)
+    director = db.Column(db.String(100), nullable=False)
+    plot = db.Column(db.String(100), nullable=False)
+    year = db.Column(db.Integer(), nullable=False)
     poster = db.Column(
         db.String(800),
         default="https://m.media-amazon.com/images/S/sash/85lhIiFCmSScRzu.png",
     )
 
     def __repr__(self):
-        return (
-            "<Watched(movie='%s', watched_date='%r', picked_by='%s', poster='%s')>"
-            % (
-                self.movie,
-                self.watched_date,
-                self.picked_by,
-                self.poster,
-            )
+        return "<Watched(title='%s', watched_date='%r', picked_by='%s', poster='%s', director='%s', plot='%s' year='%r')>" % (
+            self.title,
+            self.watched_date,
+            self.picked_by,
+            self.poster,
+            self.director,
+            self.plot,
+            self.year,
         )
 
 
@@ -74,20 +78,23 @@ def login():
 
 @app.route("/addme", methods=["GET", "POST"])
 def addme():
-    title = "Add Me"
+    web_title = "Add Me"
     if request.method == "POST":
         film = Watched(
-            movie=request.form["movie"],
+            title=request.form["title"],
             poster=request.form["poster"],
             watched_date=datetime.strptime(request.form["watched_date"], "%Y-%m-%d"),
             picked_by=request.form["picked_by"],
+            director=request.form["director"],
+            plot=request.form["plot"],
+            year=request.form["year"],
         )
         db.session.add(film)
         db.session.commit()
         return redirect("/addme")
     else:
         film_lists = Watched.query.order_by(Watched.watched_date.asc()).all()
-        return render_template("addme.html", title=title, film_lists=film_lists)
+        return render_template("addme.html", title=web_title, film_lists=film_lists)
 
 
 @app.route("/delete/<int:id>")
@@ -96,6 +103,17 @@ def delete(id):
     db.session.delete(watched_id)
     db.session.commit()
     return redirect("/addme")
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    title = "Search Film"
+    if request.method == "POST":
+        imdbid = request.form["imdbid"]
+        film = get_film_info(imdbid)
+        return render_template("search.html", title=title, data=film)
+    else:
+        return render_template("search.html", title=title)
 
 
 if __name__ == "__main__":

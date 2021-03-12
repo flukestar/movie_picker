@@ -17,14 +17,15 @@
     <div class="row g-0">
         <div class="col-md-4 d-flex align-items-center">
             <div class="container">
-                <img src="{{ film.poster }}" alt="film poster">
+                <img src="{{ film.poster }}" style="max-height: 265px;" ; class="img-fluid" alt="film poster">
             </div>
         </div>
         <div class="col-md-8">
             <div class="card-body">
-                <h5 class="card-title">{{ film.movie }}</h5>
-                <!-- <p class="card-text">{{ film.watched_date.date() }}</p> -->
-                <p class="card-text"><small class="text-muted">{{ film.picked_by }}</small></p>
+                <h5 class="card-title">{{ film.title }} ({{ film.year }})</h5>
+                <p class="card-text">Director: {{ film.director }}</p>
+                <p class="card-text">{{ film.plot }}</p>
+                <p class="card-text"><small class="text-muted">Picked by: {{ film.picked_by }}</small></p>
             </div>
         </div>
     </div>
@@ -32,24 +33,5 @@
 {% endfor %}
 
 
-<!-- <div class="container p-3">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Movie</th>
-                <th scope="col">Date</th>
-                <th scope="col">Picked by</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for film in film_lists %}
-            <tr>
-                <td>{{ film.movie }}</td>
-                <td>{{ film.watched_date.date() }}</td>
-                <td>{{ film.picked_by }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div> -->
+
 {% endblock %}
